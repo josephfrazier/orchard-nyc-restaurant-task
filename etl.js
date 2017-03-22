@@ -9,8 +9,6 @@ const jsonSql = require('json-sql')({
   namedValues: false,
 });
 
-let latestGrade;
-
 main();
 
 async function main () {
@@ -54,7 +52,7 @@ async function main () {
         'RECORD DATE': date => date.length ? date : null,
       }
     }))
-    .pipe(through2({objectMode: true}, filterLatest))
+    .pipe(through2({objectMode: true}, filterLatest()))
     .pipe(etl.collect(1000))
     .pipe(through2({objectMode: true}, async (chunk, enc, callback) => {
       // console.error(chunk);
@@ -78,21 +76,25 @@ async function main () {
 
 // keep track of the record with the most recent 'GRADE DATE'
 // when the record's 'CAMIS' changes, push the tracked record
-function filterLatest (record, enc, callback) {
-  if (!latestGrade) {
-    latestGrade = record;
-    return callback();
-  }
+function filterLatest () {
+  let latestGrade;
 
-  if (record['CAMIS'] != latestGrade['CAMIS']) {
-    this.push(latestGrade);
-    latestGrade = record;
-    return callback();
-  }
+  return function (record, enc, callback) {
+    if (!latestGrade) {
+      latestGrade = record;
+      return callback();
+    }
 
-  if (Date.parse(record['GRADE DATE']) > Date.parse(latestGrade['GRADE DATE'])) {
-    latestGrade = record;
-  }
+    if (record['CAMIS'] != latestGrade['CAMIS']) {
+      this.push(latestGrade);
+      latestGrade = record;
+      return callback();
+    }
 
-  callback();
+    if (Date.parse(record['GRADE DATE']) > Date.parse(latestGrade['GRADE DATE'])) {
+      latestGrade = record;
+    }
+
+    callback();
+  }
 }
