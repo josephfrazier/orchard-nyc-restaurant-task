@@ -65,8 +65,6 @@ async function main () {
     .pipe(filterLatest())
     .pipe(etl.collect(1000))
     .pipe(through2({objectMode: true}, (chunk, enc, callback) => {
-      // console.error(chunk);
-
       const sql = jsonSql.build({
         type: 'insert',
         table: 'testtable',
@@ -77,17 +75,15 @@ async function main () {
         if (err) throw err
       });
 
-      callback(); // TODO remove this pipe entirely
+      callback();
     }))
-    //.pipe(etl.postgres.upsert(pool,'testschema','testtable',{concurrency:4}))
 }
 
 function emptyToNull (value) {
   return value.length ? value : null;
 }
 
-// keep track of the record with the most recent 'GRADE DATE'
-// when the record's 'CAMIS' changes, push the tracked record
+// return the record with the most recent 'GRADE DATE'
 function filterLatest () {
   return through2({objectMode: true}, function ({ value: records }, enc, callback) {
     this.push(schwartzian.max(records, record => Date.parse(record['GRADE DATE'])));
