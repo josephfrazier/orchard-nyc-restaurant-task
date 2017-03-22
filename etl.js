@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const etl = require('etl');
+const group = require('sorted-group-stream');
 const through2 = require('through2');
 const pg = require('pg');
 const jsonSql = require('json-sql')({
@@ -52,6 +53,7 @@ async function main () {
         'RECORD DATE': date => date.length ? date : null,
       }
     }))
+    .pipe(group(chunk => chunk['CAMIS']))
     .pipe(filterLatest())
     .pipe(etl.collect(1000))
     .pipe(through2({objectMode: true}, async (chunk, enc, callback) => {
@@ -77,24 +79,21 @@ async function main () {
 // keep track of the record with the most recent 'GRADE DATE'
 // when the record's 'CAMIS' changes, push the tracked record
 function filterLatest () {
-  let latestGrade;
+  return through2({objectMode: true}, function ({ value: records }, enc, callback) {
+    let latestGrade;
 
-  return through2({objectMode: true}, function (record, enc, callback) {
-    if (!latestGrade) {
-      latestGrade = record;
-      return callback();
+    for (const record of records) {
+      if (!latestGrade) {
+        latestGrade = record;
+        continue;
+      }
+
+      if (Date.parse(record['GRADE DATE']) > Date.parse(latestGrade['GRADE DATE'])) {
+        latestGrade = record;
+      }
     }
 
-    if (record['CAMIS'] != latestGrade['CAMIS']) {
-      this.push(latestGrade);
-      latestGrade = record;
-      return callback();
-    }
-
-    if (Date.parse(record['GRADE DATE']) > Date.parse(latestGrade['GRADE DATE'])) {
-      latestGrade = record;
-    }
-
+    this.push(latestGrade);
     callback();
   });
 }
