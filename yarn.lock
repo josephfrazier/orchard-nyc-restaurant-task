@@ -71,6 +71,10 @@ etl@^0.4.1:
     moment "~2.12.0"
     streamz "~1.7.0"
 
+fort@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/fort/-/fort-0.1.0.tgz#4746afe94b9a7339840b8342a23916aa2a4530cd"
+
 generate-function@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/generate-function/-/generate-function-1.1.0.tgz#54c21b080192b16d9877779c5bb81666e772365f"
