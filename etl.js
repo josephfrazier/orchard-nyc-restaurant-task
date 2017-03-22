@@ -63,7 +63,6 @@ async function main () {
         values: chunk
       });
 
-      console.log(sql.query, JSON.stringify(sql.values));
       try {
         await pool.query(sql.query, sql.values);
       } catch (err) {
