@@ -42,7 +42,7 @@ async function main () {
       "__line" integer
     )`)
   } catch (err) {
-    console.trace(err);
+    console.error(err);
   }
 
   fs.createReadStream('/dev/stdin')
@@ -63,8 +63,12 @@ async function main () {
         values: chunk
       });
 
-      console.error(sql.query, JSON.stringify(sql.values));
-      await pool.query(sql.query, sql.values);
+      console.log(sql.query, JSON.stringify(sql.values));
+      try {
+        await pool.query(sql.query, sql.values);
+      } catch (err) {
+        console.error(err);
+      }
 
       callback(null, chunk); // TODO remove this pipe entirely
     }))
