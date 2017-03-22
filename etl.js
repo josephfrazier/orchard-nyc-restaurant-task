@@ -80,20 +80,13 @@ async function main () {
 // when the record's 'CAMIS' changes, push the tracked record
 function filterLatest () {
   return through2({objectMode: true}, function ({ value: records }, enc, callback) {
-    let latestGrade;
-
-    for (const record of records) {
-      if (!latestGrade) {
-        latestGrade = record;
-        continue;
-      }
-
+    this.push(records.reduce((latestGrade, record) => {
       if (Date.parse(record['GRADE DATE']) > Date.parse(latestGrade['GRADE DATE'])) {
         latestGrade = record;
       }
-    }
+      return latestGrade;
+    }));
 
-    this.push(latestGrade);
     callback();
   });
 }
