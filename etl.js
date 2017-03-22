@@ -70,7 +70,7 @@ async function main () {
         console.error(err);
       }
 
-      callback(null, chunk); // TODO remove this pipe entirely
+      callback(); // TODO remove this pipe entirely
     }))
     //.pipe(etl.postgres.upsert(pool,'testschema','testtable',{concurrency:4}))
 }
