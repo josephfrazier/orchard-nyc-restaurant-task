@@ -48,17 +48,17 @@ async function main () {
   fs.createReadStream('/dev/stdin')
     .pipe(etl.csv({
       transform: {
-        CAMIS: Number,
-        SCORE: score => score.length ? Number(score) : null,
-        'GRADE DATE': emptyToNull,
-        'RECORD DATE': emptyToNull,
-        'GRADE': emptyToNull,
-        'VIOLATION CODE': emptyToNull,
-        'VIOLATION DESCRIPTION': emptyToNull,
+        'CAMIS': Number,
         'DBA': emptyToNull,
         'BUILDING': emptyToNull,
         'PHONE': emptyToNull,
         'ACTION': emptyToNull,
+        'VIOLATION CODE': emptyToNull,
+        'VIOLATION DESCRIPTION': emptyToNull,
+        'SCORE': score => score.length ? Number(score) : null,
+        'GRADE': emptyToNull,
+        'GRADE DATE': emptyToNull,
+        'RECORD DATE': emptyToNull,
       }
     }))
     .pipe(group(chunk => chunk['CAMIS']))
