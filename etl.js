@@ -38,8 +38,7 @@ async function main () {
       "GRADE" text,
       "GRADE DATE" date,
       "RECORD DATE" date,
-      "INSPECTION TYPE" text,
-      "__line" integer
+      "INSPECTION TYPE" text
     )`)
   } catch (err) {
     console.error(err);
@@ -60,6 +59,10 @@ async function main () {
         'GRADE DATE': emptyToNull,
         'RECORD DATE': emptyToNull,
       }
+    }))
+    .pipe(etl.map(function (record) {
+      delete record['__line'];
+      this.push(record);
     }))
     .pipe(group(record => record['CAMIS']))
     .pipe(filterLatest())
