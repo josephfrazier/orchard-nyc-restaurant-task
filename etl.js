@@ -55,6 +55,7 @@ async function main () {
       }
     }))
     .pipe(through2({objectMode: true}, filterLatest))
+    .pipe(etl.collect(1000))
     .pipe(through2({objectMode: true}, async (chunk, enc, callback) => {
       // console.error(chunk);
 
