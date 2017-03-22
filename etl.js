@@ -61,14 +61,14 @@ async function main () {
         'RECORD DATE': emptyToNull,
       }
     }))
-    .pipe(group(chunk => chunk['CAMIS']))
+    .pipe(group(record => record['CAMIS']))
     .pipe(filterLatest())
     .pipe(etl.collect(1000))
-    .pipe(through2({objectMode: true}, (chunk, enc, callback) => {
+    .pipe(through2({objectMode: true}, (records, enc, callback) => {
       const sql = jsonSql.build({
         type: 'insert',
         table: 'testtable',
-        values: chunk
+        values: records
       });
 
       pool.query(sql.query, sql.values, (err) => {
