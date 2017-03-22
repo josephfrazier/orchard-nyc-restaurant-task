@@ -6,18 +6,22 @@ const through2 = require('through2');
 
 let latestGrade;
 
-fs.createReadStream('/dev/stdin')
-  .pipe(etl.csv({
-    transform: {
-      CAMIS: Number,
-    }
-  }))
-  .pipe(through2({objectMode: true}, filterLatest))
-  .pipe(through2({objectMode: true}, (chunk, enc, callback) => {
-    console.log(chunk);
-    callback();
-  }))
-  //.pipe(etl.mysql.upsert(pool,'testschema','testtable',{concurrency:4 }))
+main();
+
+function main () {
+  fs.createReadStream('/dev/stdin')
+    .pipe(etl.csv({
+      transform: {
+        CAMIS: Number,
+      }
+    }))
+    .pipe(through2({objectMode: true}, filterLatest))
+    .pipe(through2({objectMode: true}, (chunk, enc, callback) => {
+      console.log(chunk);
+      callback();
+    }))
+    //.pipe(etl.mysql.upsert(pool,'testschema','testtable',{concurrency:4 }))
+}
 
 // keep track of the record with the most recent 'GRADE DATE'
 // when the record's 'CAMIS' changes, push the tracked record
