@@ -64,7 +64,7 @@ async function main () {
     .pipe(group(chunk => chunk['CAMIS']))
     .pipe(filterLatest())
     .pipe(etl.collect(1000))
-    .pipe(through2({objectMode: true}, async (chunk, enc, callback) => {
+    .pipe(through2({objectMode: true}, (chunk, enc, callback) => {
       // console.error(chunk);
 
       const sql = jsonSql.build({
@@ -73,11 +73,9 @@ async function main () {
         values: chunk
       });
 
-      try {
-        await pool.query(sql.query, sql.values);
-      } catch (err) {
-        console.error(err);
-      }
+      pool.query(sql.query, sql.values, (err) => {
+        if (err) throw err
+      });
 
       callback(); // TODO remove this pipe entirely
     }))
