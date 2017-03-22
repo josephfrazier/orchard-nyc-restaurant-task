@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "etl": "sort --numeric-sort DOHMH_New_York_City_Restaurant_Inspection_Results.csv | pv | time ./etl.js",
     "test": "./test.sh"
   },
   "keywords": [],
