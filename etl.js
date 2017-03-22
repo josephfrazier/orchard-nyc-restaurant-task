@@ -52,7 +52,7 @@ async function main () {
         'RECORD DATE': date => date.length ? date : null,
       }
     }))
-    .pipe(through2({objectMode: true}, filterLatest()))
+    .pipe(filterLatest())
     .pipe(etl.collect(1000))
     .pipe(through2({objectMode: true}, async (chunk, enc, callback) => {
       // console.error(chunk);
@@ -79,7 +79,7 @@ async function main () {
 function filterLatest () {
   let latestGrade;
 
-  return function (record, enc, callback) {
+  return through2({objectMode: true}, function (record, enc, callback) {
     if (!latestGrade) {
       latestGrade = record;
       return callback();
@@ -96,5 +96,5 @@ function filterLatest () {
     }
 
     callback();
-  }
+  });
 }
