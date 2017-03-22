@@ -4,6 +4,7 @@ const fs = require('fs');
 const etl = require('etl');
 const group = require('sorted-group-stream');
 const through2 = require('through2');
+const schwartzian = require('fort');
 const pg = require('pg');
 const jsonSql = require('json-sql')({
   dialect: 'postgresql',
@@ -80,12 +81,7 @@ async function main () {
 // when the record's 'CAMIS' changes, push the tracked record
 function filterLatest () {
   return through2({objectMode: true}, function ({ value: records }, enc, callback) {
-    this.push(records.reduce((latestGrade, record) => {
-      if (Date.parse(record['GRADE DATE']) > Date.parse(latestGrade['GRADE DATE'])) {
-        latestGrade = record;
-      }
-      return latestGrade;
-    }));
+    this.push(schwartzian.max(records, record => Date.parse(record['GRADE DATE'])));
 
     callback();
   });
