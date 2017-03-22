@@ -716,6 +716,10 @@ lru-cache@^4.0.1:
     pseudomap "^1.0.1"
     yallist "^2.0.0"
 
+manakin@0.4:
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/manakin/-/manakin-0.4.6.tgz#759e265370c5cfeca5e02022981be7e6a56cd735"
+
 map-stream@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/map-stream/-/map-stream-0.1.0.tgz#e56aa94c4c8055a16404a0674b78f215f7c8e194"
@@ -908,12 +912,25 @@ pg-hstore@^2.3.2:
   dependencies:
     underscore "^1.7.0"
 
+pg-minify@0.4:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/pg-minify/-/pg-minify-0.4.2.tgz#c75b4b5878960fb09c3b9a4d4eb1036aea7ea0e3"
+
 pg-pool@1.*:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/pg-pool/-/pg-pool-1.6.0.tgz#2e300199927b6d7db6be71e2e3435dddddf07b41"
   dependencies:
     generic-pool "2.4.2"
     object-assign "4.1.0"
+
+pg-promise@^5.6.4:
+  version "5.6.4"
+  resolved "https://registry.yarnpkg.com/pg-promise/-/pg-promise-5.6.4.tgz#80b18a2a1bdd9af7fb0087e01a1b87ada8559a71"
+  dependencies:
+    manakin "0.4"
+    pg "5.1"
+    pg-minify "0.4"
+    spex "1.2"
 
 pg-types@1.*:
   version "1.11.0"
@@ -924,6 +941,18 @@ pg-types@1.*:
     postgres-bytea "~1.0.0"
     postgres-date "~1.0.0"
     postgres-interval "~1.0.0"
+
+pg@5.1:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/pg/-/pg-5.1.0.tgz#073b9b36763ad8a5478dbb85effef45e739ba9d8"
+  dependencies:
+    buffer-writer "1.0.1"
+    generic-pool "2.4.2"
+    packet-reader "0.2.0"
+    pg-connection-string "0.1.3"
+    pg-types "1.*"
+    pgpass "0.0.6"
+    semver "4.3.2"
 
 pg@^4.5.1:
   version "4.5.6"
@@ -954,6 +983,12 @@ pgpass@0.0.3:
   resolved "https://registry.yarnpkg.com/pgpass/-/pgpass-0.0.3.tgz#12e67e343b3189c2f31206ebc9cc0befffcf9140"
   dependencies:
     split "~0.3"
+
+pgpass@0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/pgpass/-/pgpass-0.0.6.tgz#f6276200d01739da1eea63138bdca35ff4bd7280"
+  dependencies:
+    split "^1.0.0"
 
 pgpass@1.x:
   version "1.0.1"
@@ -1143,6 +1178,10 @@ sntp@1.x.x:
   resolved "https://registry.yarnpkg.com/sntp/-/sntp-1.0.9.tgz#6541184cc90aeea6c6e7b35e2659082443c66198"
   dependencies:
     hoek "2.x.x"
+
+spex@1.2:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/spex/-/spex-1.2.0.tgz#6264b3b8acbc444477f06dbb66d425c0ee1074c0"
 
 split2@^2.1.0:
   version "2.1.1"
@@ -1361,13 +1400,9 @@ uid-number@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/uid-number/-/uid-number-0.0.6.tgz#0ea10e8035e8eb5b8e4449f06da1c730663baa81"
 
-underscore@1.8.2:
+underscore@1.8.2, underscore@^1.7.0:
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.2.tgz#64df2eb590899de950782f3735190ba42ebf311d"
-
-underscore@^1.7.0:
-  version "1.8.3"
-  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
 
 unpipe@^1.0.0:
   version "1.0.0"
