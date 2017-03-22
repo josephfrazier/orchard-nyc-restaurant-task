@@ -52,6 +52,13 @@ async function main () {
         SCORE: score => score.length ? Number(score) : null,
         'GRADE DATE': emptyToNull,
         'RECORD DATE': emptyToNull,
+        'GRADE': emptyToNull,
+        'VIOLATION CODE': emptyToNull,
+        'VIOLATION DESCRIPTION': emptyToNull,
+        'DBA': emptyToNull,
+        'BUILDING': emptyToNull,
+        'PHONE': emptyToNull,
+        'ACTION': emptyToNull,
       }
     }))
     .pipe(group(chunk => chunk['CAMIS']))
