@@ -50,8 +50,8 @@ async function main () {
       transform: {
         CAMIS: Number,
         SCORE: score => score.length ? Number(score) : null,
-        'GRADE DATE': date => date.length ? date : null,
-        'RECORD DATE': date => date.length ? date : null,
+        'GRADE DATE': emptyToNull,
+        'RECORD DATE': emptyToNull,
       }
     }))
     .pipe(group(chunk => chunk['CAMIS']))
@@ -75,6 +75,10 @@ async function main () {
       callback(); // TODO remove this pipe entirely
     }))
     //.pipe(etl.postgres.upsert(pool,'testschema','testtable',{concurrency:4}))
+}
+
+function emptyToNull (value) {
+  return value.length ? value : null;
 }
 
 // keep track of the record with the most recent 'GRADE DATE'
