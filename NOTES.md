@@ -1,7 +1,7 @@
 * SQL query for top 10 Thai restaurants with A/B rating. More recent grade dates come first, but maybe grade should factor in too?
 
   ```sql
-  select * from testtable where "CUISINE DESCRIPTION" = 'Thai' and "GRADE" in ('A', 'B') order by "GRADE DATE" desc limit 10;
+  select * from testtable where cuisine_description = 'Thai' and grade in ('A', 'B') order by grade_date desc limit 10;
   ```
 
 * Here's what appears to be a visualization of the data: https://data.cityofnewyork.us/Health/CAMIS-count/trpv-hzf9/data

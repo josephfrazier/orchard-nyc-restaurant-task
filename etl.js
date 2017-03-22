@@ -20,47 +20,48 @@ async function main () {
   await pool.query('CREATE SCHEMA testschema');
   await pool.query('DROP TABLE IF EXISTS testtable');
   await pool.query(`CREATE TABLE testtable (
-    "CAMIS" integer,
-    "DBA" text,
-    "BORO" text,
-    "BUILDING" text,
-    "STREET" text,
-    "ZIPCODE" text,
-    "PHONE" text,
-    "CUISINE DESCRIPTION" text,
-    "INSPECTION DATE" date,
-    "ACTION" text,
-    "VIOLATION CODE" text,
-    "VIOLATION DESCRIPTION" text,
-    "CRITICAL FLAG" text,
-    "SCORE" integer,
-    "GRADE" text,
-    "GRADE DATE" date,
-    "RECORD DATE" date,
-    "INSPECTION TYPE" text
+    camis integer,
+    dba text,
+    boro text,
+    building text,
+    street text,
+    zipcode text,
+    phone text,
+    cuisine_description text,
+    inspection_date date,
+    action text,
+    violation_code text,
+    violation_description text,
+    critical_flag text,
+    score integer,
+    grade text,
+    grade_date date,
+    record_date date,
+    inspection_type text
   )`)
 
   fs.createReadStream('/dev/stdin')
     .pipe(etl.csv({
+      sanitize: true,
       transform: {
-        'CAMIS': Number,
-        'DBA': emptyToNull,
-        'BUILDING': emptyToNull,
-        'PHONE': emptyToNull,
-        'ACTION': emptyToNull,
-        'VIOLATION CODE': emptyToNull,
-        'VIOLATION DESCRIPTION': emptyToNull,
-        'SCORE': score => score.length ? Number(score) : null,
-        'GRADE': emptyToNull,
-        'GRADE DATE': emptyToNull,
-        'RECORD DATE': emptyToNull,
+        camis: Number,
+        dba: emptyToNull,
+        building: emptyToNull,
+        phone: emptyToNull,
+        action: emptyToNull,
+        violation_code: emptyToNull,
+        violation_description: emptyToNull,
+        score: score => score.length ? Number(score) : null,
+        grade: emptyToNull,
+        grade_date: emptyToNull,
+        record_date: emptyToNull,
       }
     }))
     .pipe(etl.map(function (record) {
-      delete record['__line'];
+      delete record.__line;
       this.push(record);
     }))
-    .pipe(group(record => record['CAMIS']))
+    .pipe(group(record => record.camis))
     .pipe(filterLatest())
     .pipe(etl.collect(1000))
     .pipe(through2({objectMode: true}, (records, enc, callback) => {
@@ -82,10 +83,10 @@ function emptyToNull (value) {
   return value.length ? value : null;
 }
 
-// return the record with the most recent 'GRADE DATE'
+// return the record with the most recent 'grade_date'
 function filterLatest () {
   return through2({objectMode: true}, function ({ value: records }, enc, callback) {
-    this.push(schwartzian.max(records, record => Date.parse(record['GRADE DATE'])));
+    this.push(schwartzian.max(records, record => Date.parse(record.grade_date)));
 
     callback();
   });
