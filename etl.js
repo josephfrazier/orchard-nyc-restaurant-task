@@ -49,6 +49,7 @@ async function main () {
     .pipe(etl.csv({
       transform: {
         CAMIS: Number,
+        SCORE: score => score.length ? Number(score) : null,
         'GRADE DATE': date => date.length ? date : null,
         'RECORD DATE': date => date.length ? date : null,
       }
