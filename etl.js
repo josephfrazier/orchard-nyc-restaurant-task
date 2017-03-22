@@ -45,16 +45,7 @@ async function main () {
       sanitize: true,
       transform: {
         camis: Number,
-        dba: emptyToNull,
-        building: emptyToNull,
-        phone: emptyToNull,
-        action: emptyToNull,
-        violation_code: emptyToNull,
-        violation_description: emptyToNull,
-        score: score => score.length ? Number(score) : null,
-        grade: emptyToNull,
-        grade_date: emptyToNull,
-        record_date: emptyToNull,
+        score: Number,
       }
     }))
     .pipe(etl.map(function (record) {
@@ -77,10 +68,6 @@ async function main () {
 
       callback();
     }))
-}
-
-function emptyToNull (value) {
-  return value.length ? value : null;
 }
 
 // return the record with the most recent 'grade_date'
