@@ -16,33 +16,29 @@ main();
 async function main () {
   const pool = new pg.Pool(process.env.DATABASE_URL);
 
-  try {
-    await pool.query('DROP SCHEMA IF EXISTS testschema');
-    await pool.query('CREATE SCHEMA testschema');
-    await pool.query('DROP TABLE IF EXISTS testtable');
-    await pool.query(`CREATE TABLE testtable (
-      "CAMIS" integer,
-      "DBA" text,
-      "BORO" text,
-      "BUILDING" text,
-      "STREET" text,
-      "ZIPCODE" text,
-      "PHONE" text,
-      "CUISINE DESCRIPTION" text,
-      "INSPECTION DATE" date,
-      "ACTION" text,
-      "VIOLATION CODE" text,
-      "VIOLATION DESCRIPTION" text,
-      "CRITICAL FLAG" text,
-      "SCORE" integer,
-      "GRADE" text,
-      "GRADE DATE" date,
-      "RECORD DATE" date,
-      "INSPECTION TYPE" text
-    )`)
-  } catch (err) {
-    console.error(err);
-  }
+  await pool.query('DROP SCHEMA IF EXISTS testschema');
+  await pool.query('CREATE SCHEMA testschema');
+  await pool.query('DROP TABLE IF EXISTS testtable');
+  await pool.query(`CREATE TABLE testtable (
+    "CAMIS" integer,
+    "DBA" text,
+    "BORO" text,
+    "BUILDING" text,
+    "STREET" text,
+    "ZIPCODE" text,
+    "PHONE" text,
+    "CUISINE DESCRIPTION" text,
+    "INSPECTION DATE" date,
+    "ACTION" text,
+    "VIOLATION CODE" text,
+    "VIOLATION DESCRIPTION" text,
+    "CRITICAL FLAG" text,
+    "SCORE" integer,
+    "GRADE" text,
+    "GRADE DATE" date,
+    "RECORD DATE" date,
+    "INSPECTION TYPE" text
+  )`)
 
   fs.createReadStream('/dev/stdin')
     .pipe(etl.csv({
