@@ -1,3 +1,5 @@
+* Use create-react-app and google-map-react for frontend?
+  * Or just use express and https://developers.google.com/maps/documentation/javascript/
 * SQL query for top 10 Thai restaurants with A/B rating. More recent grade dates come first, but maybe grade should factor in too?
 
   ```sql
