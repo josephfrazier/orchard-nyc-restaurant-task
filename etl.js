@@ -6,6 +6,7 @@ const group = require('sorted-group-stream');
 const through2 = require('through2');
 const schwartzian = require('fort');
 const pg = require('pg');
+const pgConnectionString = require('pg-connection-string');
 const jsonSql = require('json-sql')({
   dialect: 'postgresql',
   namedValues: false,
@@ -15,7 +16,7 @@ main();
 
 async function main () {
   console.log(`DATABASE_URL: ${process.env.DATABASE_URL}`);
-  const pool = new pg.Pool(process.env.DATABASE_URL);
+  const pool = new pg.Pool(pgConnectionString.parse(process.env.DATABASE_URL));
 
   await pool.query('DROP SCHEMA IF EXISTS testschema');
   await pool.query('CREATE SCHEMA testschema');
