@@ -8,8 +8,7 @@
   },
   "main": "index.js",
   "cacheDirectories": [
-    "data",
-    "node_modules"
+    "data"
   ],
   "scripts": {
     "download": "mkdir -p data && ls data/sorted.csv || curl https://nycopendata.socrata.com/api/views/xx67-kt59/rows.csv?accessType=DOWNLOAD | sort --numeric-sort > data/sorted.csv",
