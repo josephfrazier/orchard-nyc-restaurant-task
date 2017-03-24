@@ -14,19 +14,27 @@
   "scripts": {
     "download": "mkdir -p data && ls data/sorted.csv || curl https://nycopendata.socrata.com/api/views/xx67-kt59/rows.csv?accessType=DOWNLOAD | sort --numeric-sort > data/sorted.csv",
     "etl": "yarn download && ./etl.js < data/sorted.csv",
-    "start": "yarn etl & cd frontend && yarn start",
+    "start": "yarn etl & yarn start-web",
+    "start-web": "node ./bin/www",
     "test": "./test.sh"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
     "csv": "^1.1.1",
+    "debug": "^2.6.3",
     "etl": "^0.4.1",
+    "express": "^4.15.2",
     "fort": "^0.1.0",
+    "jade": "^1.11.0",
     "json-sql": "^0.3.10",
+    "morgan": "^1.8.1",
     "pg": "^6.1.5",
     "pg-connection-string": "^0.1.3",
+    "serve-favicon": "^2.4.1",
     "sorted-group-stream": "^3.0.0",
     "through2": "^2.0.3"
   }
