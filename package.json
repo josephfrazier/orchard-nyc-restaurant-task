@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "etl": "sort --numeric-sort DOHMH_New_York_City_Restaurant_Inspection_Results.csv | pv | time ./etl.js",
+    "download": "mkdir -p data && ls data/sorted.csv || curl https://nycopendata.socrata.com/api/views/xx67-kt59/rows.csv?accessType=DOWNLOAD | sort --numeric-sort > data/sorted.csv",
+    "etl": "yarn download && ./etl.js < data/sorted.csv",
+    "start": "yarn etl",
     "test": "./test.sh"
   },
   "keywords": [],
