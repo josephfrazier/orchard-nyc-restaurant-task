@@ -18,7 +18,7 @@ router.get('/', async function(req, res, next) {
   // TODO this templating should be in views/index.jade,
   // but I haven't figured it out quite yet
   let restaurantsHtml = `
-    <table>
+    <table class="pure-table">
       <thead>
         <tr>
           ${headers.map(h => `<th>${escape(Case.capital(h))}</th>`).join('')}
