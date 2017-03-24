@@ -67,7 +67,7 @@ async function main () {
       console.log("inserted another 1000 rows");
 
       callback();
-    }))
+    }, () => console.log("finished inserting rows")))
 }
 
 // return the record with the most recent 'grade_date'
