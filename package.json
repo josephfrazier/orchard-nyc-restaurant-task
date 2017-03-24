@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "orchard-nyc-restaurant-task",
   "version": "1.0.0",
   "description": "",
