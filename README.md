@@ -8,7 +8,7 @@ Assume you have a friend who loves Thai food, but refuses to eat at any place wi
 
 1. Using the language and data store of your choice, create an ETL (Extract, Transform & Load) job to ingest this ~500k rows DOHMH New York City Restaurant Inspection Results data set from NYC Open Data ([Download Link](https://nycopendata.socrata.com/api/views/xx67-kt59/rows.csv?accessType=DOWNLOAD))
 
-    * The ETL job can be found in [etl.js](etl.js). It reads the CSV sorted by CAMIS from stdin, groups the rows by CAMIS, and stores the row with the latest 'GRADE DATE' in a PostgreSQL database.
+    * The ETL job can be found in [etl.js](etl.js). It reads the CSV sorted by CAMIS from stdin (this part is done by the `etl` script in [package.json](package.json)), groups the rows by CAMIS, and stores the row with the latest 'GRADE DATE' in a PostgreSQL database.
 
 2. In addition to submitting working code for the ETL job, please include the schema design along with a quick explanation for the choices made.
 
