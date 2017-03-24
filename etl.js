@@ -14,6 +14,7 @@ const jsonSql = require('json-sql')({
 main();
 
 async function main () {
+  console.log(`DATABASE_URL: ${process.env.DATABASE_URL}`);
   const pool = new pg.Pool(process.env.DATABASE_URL);
 
   await pool.query('DROP SCHEMA IF EXISTS testschema');
