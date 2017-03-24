@@ -74,6 +74,10 @@ bytes@2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-2.4.0.tgz#7d97196f9d5baf7f6935e25985549edd2a6c2339"
 
+case@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/case/-/case-1.5.1.tgz#f4586a2134f558b443b6c325cb1d13768f6be9a2"
+
 character-parser@1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/character-parser/-/character-parser-1.2.1.tgz#c0dde4ab182713b919b970959a123ecc1a30fcd6"
