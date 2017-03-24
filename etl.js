@@ -56,17 +56,15 @@ async function main () {
     .pipe(group(record => record.camis))
     .pipe(filterLatest())
     .pipe(etl.collect(1000))
-    .pipe(through2({objectMode: true}, (records, enc, callback) => {
+    .pipe(through2({objectMode: true}, async (records, enc, callback) => {
       const sql = jsonSql.build({
         type: 'insert',
         table: 'testtable',
         values: records
       });
 
-      pool.query(sql.query, sql.values, (err) => {
-        if (err) throw err
-        console.log("inserted another 1000 rows")
-      });
+      await pool.query(sql.query, sql.values);
+      console.log("inserted another 1000 rows");
 
       callback();
     }))
