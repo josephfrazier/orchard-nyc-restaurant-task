@@ -65,6 +65,7 @@ async function main () {
 
       pool.query(sql.query, sql.values, (err) => {
         if (err) throw err
+        console.log("inserted another 1000 rows")
       });
 
       callback();
