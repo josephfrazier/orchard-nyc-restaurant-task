@@ -15,7 +15,7 @@
     "etl": "yarn download && ./etl.js < data/sorted.csv",
     "start": "yarn etl & yarn start-web",
     "start-web": "node ./bin/www",
-    "test": "./test.sh"
+    "test": "standard"
   },
   "keywords": [],
   "author": "",
@@ -39,5 +39,8 @@
     "serve-favicon": "^2.4.1",
     "sorted-group-stream": "^3.0.0",
     "through2": "^2.0.3"
+  },
+  "devDependencies": {
+    "standard": "^9.0.2"
   }
 }
