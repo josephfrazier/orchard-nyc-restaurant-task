@@ -1,3 +1,5 @@
+Below is the text found in [SoftwareEngineerTest1.pdf](SoftwareEngineerTest1.pdf), with responses interspersed as the nested bullet points.
+
 # The Orchard
 ## Software Engineer Assessment
 ### The NYC Restaurant Task
