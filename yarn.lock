@@ -364,6 +364,13 @@ json-stringify-safe@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
 
+json-to-table@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/json-to-table/-/json-to-table-4.0.0.tgz#cbcfa0e06aca0ae3df297bc4f870e51da6c4d2a1"
+  dependencies:
+    lodash "~4.16.0"
+    traverse "~0.6.6"
+
 jstransformer@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/jstransformer/-/jstransformer-0.0.2.tgz#7aae29a903d196cfa0973d885d3e47947ecd76ab"
@@ -374,6 +381,10 @@ jstransformer@0.0.2:
 lodash.get@^4.0.0:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+
+lodash@~4.16.0:
+  version "4.16.6"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.16.6.tgz#d22c9ac660288f3843e16ba7d2b5d06cca27d777"
 
 media-typer@0.3.0:
   version "0.3.0"
@@ -700,6 +711,10 @@ transformers@2.1.0:
     css "~1.0.8"
     promise "~2.0"
     uglify-js "~2.2.5"
+
+traverse@~0.6.6:
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.6.tgz#cbdf560fd7b9af632502fed40f918c157ea97137"
 
 type-is@~1.6.14:
   version "1.6.14"
